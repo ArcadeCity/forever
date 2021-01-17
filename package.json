@@ -5,11 +5,16 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint:prettier:fix": "prettier --write \"pages/**/*.{js,ts,tsx,md,mdx}\" *.js"
   },
   "dependencies": {
     "next": "10.0.5",
+    "prettier": "^2.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@blockstack/prettier-config": "^0.0.6"
   }
 }
