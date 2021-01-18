@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { AppConfig, openContractDeploy, showConnect, UserSession } from '@stacks/connect';
+import {
+  AppConfig,
+  openContractCall,
+  openContractDeploy,
+  showConnect,
+  UserSession,
+} from '@stacks/connect';
 import { StacksMainnet } from '@stacks/network';
 import { Propaganda } from '../components/propaganda';
 
@@ -15,6 +21,40 @@ export default function Home() {
   const [authed, setAuthed] = useState(false);
   const [input, setInput] = useState('');
   const onChange = event => setInput(event.target.value);
+
+  const call = async () => {
+    console.log('Test call contract');
+    // const functionArgs = [
+    //   uintCV(1234),
+    //   intCV(-234),
+    //   bufferCV(Buffer.from('hello, world')),
+    //   stringAsciiCV('hey-ascii'),
+    //   stringUtf8CV('hey-utf8'),
+    //   standardPrincipalCV('STB44HYPYAT2BB2QE513NSP81HTMYWBJP02HPGK6'),
+    //   trueCV(),
+    // ];
+
+    const functionArgs = [];
+
+    const options = {
+      contractAddress: 'SP2SYHR84SDJJDK8M09HFS4KBFXPPCX9H7RZ9YVTS',
+      contractName: 'contract-11001881605',
+      functionName: 'my-stx-balance',
+      functionArgs,
+      //   authOrigin: null,
+      appDetails: {
+        name: 'Arcade City',
+        icon: window.location.origin + '/logo167.png',
+      },
+      finished: data => {
+        console.log('Transaction ID:', data.txId);
+        console.log('Raw transaction:', data.txRaw);
+      },
+    };
+
+    const res = await openContractCall(options);
+    console.log('res?', res);
+  };
 
   const authenticate = () => {
     showConnect({
@@ -103,10 +143,18 @@ export default function Home() {
             onClick={deploy}
           >
             Deploy Contract
-          </button>
+          </button>{' '}
           <button
             type="button"
-            className="ml-8 inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="ml-6 inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={call}
+          >
+            Test Call Contract
+          </button>
+          '
+          <button
+            type="button"
+            className="ml-6 inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             onClick={logout}
           >
             Log out
