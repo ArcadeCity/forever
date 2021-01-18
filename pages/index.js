@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { AppConfig, showConnect, UserSession } from '@stacks/connect';
@@ -22,6 +23,21 @@ function authenticate() {
 }
 
 export default function Home() {
+  const [authed, setAuthed] = useState(false);
+  useEffect(() => {
+    const signedIn = userSession.isUserSignedIn();
+    if (userSession.isSignInPending()) {
+      console.log('Pending signin...');
+      userSession.handlePendingSignIn().then(userData => {
+        console.log('userData is now:', userData);
+      });
+    } else if (signedIn) {
+      const userData = userSession.loadUserData();
+      console.log('Signed in', userData);
+    }
+    setAuthed(signedIn);
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -33,6 +49,7 @@ export default function Home() {
         <button onClick={authenticate} style={{ padding: 12 }}>
           Log in with Blockstack
         </button>
+        <p>Authed? {JSON.stringify(authed)}</p>
       </main>
     </div>
   );
