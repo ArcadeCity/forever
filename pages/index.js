@@ -7,9 +7,7 @@ import { StacksMainnet } from '@stacks/network';
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
 const codeBody = '(begin (print "hello, world"))';
-const network = new StacksMainnet(); // or new StacksMainnet
-
-console.log('network?', network);
+const network = new StacksMainnet();
 
 function authenticate() {
   showConnect({
@@ -69,12 +67,22 @@ export default function Home() {
   if (authed) {
     return (
       <div className={styles.container}>
-        <button onClick={deploy} style={{ padding: 12 }}>
-          Deploy Contract
-        </button>
-        <button onClick={logout} style={{ marginTop: 20, padding: 12 }}>
-          Log out
-        </button>
+        <div className="font-sans">
+          <button
+            type="button"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={deploy}
+          >
+            Deploy Contract
+          </button>
+          <button
+            type="button"
+            className="ml-8 inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={logout}
+          >
+            Log out
+          </button>
+        </div>
       </div>
     );
   }
@@ -87,10 +95,14 @@ export default function Home() {
       </Head>
 
       <main>
-        <button onClick={authenticate} style={{ padding: 12 }}>
+        <button
+          onClick={authenticate}
+          type="button"
+          className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
           Log in with Blockstack
         </button>
-        <p>Authed? {JSON.stringify(authed)}</p>
+        {/* <p>Authed? {JSON.stringify(authed)}</p> */}
       </main>
     </div>
   );

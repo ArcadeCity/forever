@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "@stacks/connect": "^4.3.16-alpha.75e60a4.0",
+    "autoprefixer": "^10.2.1",
     "blockstack": "^21.1.1",
     "next": "10.0.5",
+    "postcss": "^8.2.4",
     "prettier": "^2.2.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@blockstack/prettier-config": "^0.0.6",
