@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { AppConfig, showConnect, UserSession } from '@stacks/connect';
+import { AppConfig, openContractDeploy, showConnect, UserSession } from '@stacks/connect';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
+const codeBody = '(begin (print "hello, world"))';
 
 function authenticate() {
   showConnect({
@@ -37,6 +38,32 @@ export default function Home() {
     }
     setAuthed(signedIn);
   }, []);
+
+  const deploy = () => {
+    console.log('deploy...?');
+    openContractDeploy({
+      contractName: 'hello-world',
+      codeBody,
+      appDetails: {
+        name: 'Say Something Forever',
+        icon: window.location.origin + '/vercel.svg',
+      },
+      finished: data => {
+        console.log('Transaction ID:', data.txId);
+        console.log('Raw transaction:', data.txRaw);
+      },
+    });
+  };
+
+  if (authed) {
+    return (
+      <div className={styles.container}>
+        <button onClick={deploy} style={{ padding: 12 }}>
+          Deploy Contract
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
