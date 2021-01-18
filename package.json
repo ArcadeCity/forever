@@ -9,7 +9,7 @@
     "lint:prettier:fix": "prettier --write \"pages/**/*.{js,ts,tsx,md,mdx}\" *.js"
   },
   "dependencies": {
-    "@stacks/connect": "^4.3.15",
+    "@stacks/connect": "^4.3.16-alpha.75e60a4.0",
     "blockstack": "^21.1.1",
     "next": "10.0.5",
     "prettier": "^2.2.1",
