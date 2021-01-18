@@ -10,6 +10,7 @@ import {
 } from '@stacks/connect';
 import { StacksMainnet } from '@stacks/network';
 import { Propaganda } from '../components/propaganda';
+// import counter from '../contracts/counter.clar';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
@@ -38,8 +39,8 @@ export default function Home() {
 
     const options = {
       contractAddress: 'SP2SYHR84SDJJDK8M09HFS4KBFXPPCX9H7RZ9YVTS',
-      contractName: 'contract-11001881605',
-      functionName: 'my-stx-balance',
+      contractName: 'counter-test',
+      functionName: 'increment',
       functionArgs,
       //   authOrigin: null,
       appDetails: {
@@ -95,15 +96,34 @@ export default function Home() {
   }, []);
 
   const deploy = () => {
+    //     const codeBody = `
+    // ;; forever.arcade.city
+    // (print "${escapeHtml(input)}")
+    // `;
+
     const codeBody = `
-;; forever.arcade.city
-(print "${escapeHtml(input)}")
-`;
+    (define-data-var counter int 0)
+
+    (define-public (get-counter)
+      (ok (var-get counter)))
+
+    (define-public (increment)
+      (begin
+        (var-set counter (+ (var-get counter) 1))
+        (ok (var-get counter))))
+
+    (define-public (decrement)
+      (begin
+        (var-set counter (- (var-get counter) 1))
+        (ok (var-get counter))))
+    `;
+
     console.log(input);
     console.log(codeBody);
+
     openContractDeploy({
       network,
-      contractName: 'forever-test',
+      contractName: 'counter-test',
       codeBody,
       appDetails: {
         name: 'Arcade City',
