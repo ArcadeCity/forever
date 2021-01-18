@@ -15,7 +15,7 @@ function authenticate() {
   showConnect({
     network,
     appDetails: {
-      name: 'Say Something Forever',
+      name: 'Arcade City',
       icon: window.location.origin + '/vercel.svg',
     },
     redirectTo: '/',
@@ -30,6 +30,10 @@ function authenticate() {
 
 export default function Home() {
   const [authed, setAuthed] = useState(false);
+  const logout = () => {
+    userSession.signUserOut();
+    setAuthed(false);
+  };
   useEffect(() => {
     const signedIn = userSession.isUserSignedIn();
     if (userSession.isSignInPending()) {
@@ -51,7 +55,7 @@ export default function Home() {
       contractName: 'hello-world',
       codeBody,
       appDetails: {
-        name: 'Say Something Forever',
+        name: 'Arcade City',
         icon: window.location.origin + '/vercel.svg',
       },
       finished: data => {
@@ -66,6 +70,9 @@ export default function Home() {
       <div className={styles.container}>
         <button onClick={deploy} style={{ padding: 12 }}>
           Deploy Contract
+        </button>
+        <button onClick={logout} style={{ marginTop: 20, padding: 12 }}>
+          Log out
         </button>
       </div>
     );
