@@ -14,26 +14,27 @@ const codeBody = `
 `;
 const network = new StacksMainnet();
 
-function authenticate() {
-  showConnect({
-    network,
-    appDetails: {
-      name: 'Arcade City',
-      icon: window.location.origin + '/vercel.svg',
-    },
-    redirectTo: '/',
-    finished: () => {
-      let userData = userSession.loadUserData();
-      console.log(userData);
-      setAuthed(true);
-      // Save or otherwise utilize userData post-authentication
-    },
-    userSession: userSession,
-  });
-}
-
 export default function Home() {
   const [authed, setAuthed] = useState(false);
+
+  const authenticate = () => {
+    showConnect({
+      network,
+      appDetails: {
+        name: 'Arcade City',
+        icon: window.location.origin + '/vercel.svg',
+      },
+      redirectTo: '/',
+      finished: () => {
+        let userData = userSession.loadUserData();
+        console.log(userData);
+        setAuthed(true);
+        // Save or otherwise utilize userData post-authentication
+      },
+      userSession: userSession,
+    });
+  };
+
   const logout = () => {
     userSession.signUserOut();
     setAuthed(false);
@@ -46,7 +47,7 @@ export default function Home() {
       console.log('Pending signin...');
       userSession.handlePendingSignIn().then(userData => {
         console.log('userData is now:', userData);
-        setAuthed(signedIn);
+        setAuthed(true);
       });
     } else if (signedIn) {
       const userData = userSession.loadUserData();
