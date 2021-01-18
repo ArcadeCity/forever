@@ -21,6 +21,7 @@ function authenticate() {
     finished: () => {
       let userData = userSession.loadUserData();
       console.log(userData);
+      setAuthed(true);
       // Save or otherwise utilize userData post-authentication
     },
     userSession: userSession,
@@ -35,7 +36,9 @@ export default function Home() {
   };
   useEffect(() => {
     const signedIn = userSession.isUserSignedIn();
+    setAuthed(signedIn);
     if (userSession.isSignInPending()) {
+      if (signedIn) return;
       console.log('Pending signin...');
       userSession.handlePendingSignIn().then(userData => {
         console.log('userData is now:', userData);
@@ -45,7 +48,6 @@ export default function Home() {
       const userData = userSession.loadUserData();
       console.log('Signed in', userData);
     }
-    setAuthed(signedIn);
   }, []);
 
   const deploy = () => {
