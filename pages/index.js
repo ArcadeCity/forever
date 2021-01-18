@@ -7,7 +7,11 @@ import { Propaganda } from '../components/propaganda';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
-const codeBody = '(begin (print "hello, world"))';
+// const codeBody = '(begin (print "hello, world"))';
+const codeBody = `
+    ;; forever.arcade.city
+    (print "Is this thing on?")
+`;
 const network = new StacksMainnet();
 
 function authenticate() {
@@ -54,7 +58,7 @@ export default function Home() {
     console.log('deploy...?');
     openContractDeploy({
       network,
-      contractName: 'hello-world',
+      contractName: 'forever',
       codeBody,
       appDetails: {
         name: 'Arcade City',
