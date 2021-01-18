@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stacks/connect": "^4.3.16-alpha.75e60a4.0",
+    "@stacks/connect-react": "^2.17.15",
     "@stacks/connect-ui": "^2.17.17-alpha.75e60a4.0",
     "autoprefixer": "^10.2.1",
     "blockstack": "^21.1.1",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@blockstack/prettier-config": "^0.0.6",
+    "@types/react": "^17.0.0",
     "lodash-es": "^4.17.20"
   }
 }
