@@ -8,14 +8,13 @@ import { Propaganda } from '../components/propaganda';
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
 // const codeBody = '(begin (print "hello, world"))';
-const codeBody = `
-    ;; forever.arcade.city
-    (print "Is this thing on?")
-`;
+
 const network = new StacksMainnet();
 
 export default function Home() {
   const [authed, setAuthed] = useState(false);
+  const [input, setInput] = useState('');
+  const onChange = event => setInput(event.target.value);
 
   const authenticate = () => {
     showConnect({
@@ -56,7 +55,12 @@ export default function Home() {
   }, []);
 
   const deploy = () => {
-    console.log('deploy...?');
+    const codeBody = `
+;; forever.arcade.city
+(print "${escapeHtml(input)}")
+`;
+    console.log(input);
+    console.log(codeBody);
     openContractDeploy({
       network,
       contractName: 'forever',
@@ -76,6 +80,23 @@ export default function Home() {
     return (
       <div className={styles.container}>
         <div className="font-sans">
+          <div>
+            <label htmlFor="text" className="block text-sm font-medium text-gray-700">
+              Text
+            </label>
+            <div className="mt-1 mb-4">
+              <input
+                type="text"
+                value={input}
+                onChange={onChange}
+                name="text"
+                id="text"
+                autoFocus
+                className="p-4 shadow focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                placeholder="Type here what to say forever"
+              />
+            </div>
+          </div>
           <button
             type="button"
             className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -123,7 +144,7 @@ export default function Home() {
               <main className="flex flex-col justify-center mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                 <div className="sm:text-center lg:text-left">
                   <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                    <span className="block xl:inline">Say something</span>
+                    <span className="block xl:inline">Say something </span>
                     <span className="block text-indigo-600 xl:inline">forever.</span>
                   </h1>
                   <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
@@ -169,4 +190,13 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
