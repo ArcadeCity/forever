@@ -63,7 +63,7 @@ export default function Home() {
     console.log(codeBody);
     openContractDeploy({
       network,
-      contractName: 'forever',
+      contractName: 'forever-test',
       codeBody,
       appDetails: {
         name: 'Arcade City',
