@@ -17,6 +17,7 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "@blockstack/prettier-config": "^0.0.6"
+    "@blockstack/prettier-config": "^0.0.6",
+    "lodash-es": "^4.17.20"
   }
 }

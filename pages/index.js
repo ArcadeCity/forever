@@ -2,13 +2,18 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { AppConfig, openContractDeploy, showConnect, UserSession } from '@stacks/connect';
+import { StacksMainnet } from '@stacks/network';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
 const codeBody = '(begin (print "hello, world"))';
+const network = new StacksMainnet(); // or new StacksMainnet
+
+console.log('network?', network);
 
 function authenticate() {
   showConnect({
+    network,
     appDetails: {
       name: 'Say Something Forever',
       icon: window.location.origin + '/vercel.svg',
@@ -42,6 +47,7 @@ export default function Home() {
   const deploy = () => {
     console.log('deploy...?');
     openContractDeploy({
+      network,
       contractName: 'hello-world',
       codeBody,
       appDetails: {
