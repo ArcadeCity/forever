@@ -188,9 +188,9 @@
     cross-fetch "^3.0.6"
 
 "@stacks/connect-ui@^2.17.17-alpha.75e60a4.0":
-  version "2.17.17-alpha.fba1619.0"
-  resolved "https://registry.npmjs.org/@stacks/connect-ui/-/connect-ui-2.17.17-alpha.fba1619.0.tgz#2c38559aee30567135feea9e475a1879359aee8f"
-  integrity sha512-HYZDyfIdVjyKjR/+Ar0PE3GkN01UmfVu0XBEjde/gE8vpLNMqmqJbDthM4vUgUI+jRqueV1X/f5gDFjmZO3jcQ==
+  version "2.17.17-alpha.75e60a4.0"
+  resolved "https://registry.npmjs.org/@stacks/connect-ui/-/connect-ui-2.17.17-alpha.75e60a4.0.tgz#1ed56fbd609fbc5382e77b397ce307bf2f45fa03"
+  integrity sha512-7zRTie738Z58wqU9XMKg9DZwfvAggsqtJAqmU4M48f33aZH1kgTgJo4JO0kMgzLTPghRAoi+j1IhNg5ajPG6dw==
   dependencies:
     "@stencil/core" "^1.17.3"
 

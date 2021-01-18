@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stacks/connect": "^4.3.16-alpha.75e60a4.0",
+    "@stacks/connect-ui": "^2.17.17-alpha.75e60a4.0",
     "autoprefixer": "^10.2.1",
     "blockstack": "^21.1.1",
     "next": "10.0.5",
