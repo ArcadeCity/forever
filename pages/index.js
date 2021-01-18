@@ -40,6 +40,7 @@ export default function Home() {
       console.log('Pending signin...');
       userSession.handlePendingSignIn().then(userData => {
         console.log('userData is now:', userData);
+        setAuthed(signedIn);
       });
     } else if (signedIn) {
       const userData = userSession.loadUserData();
