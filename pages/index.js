@@ -124,7 +124,7 @@ export default function Home() {
       </Head>
 
       <div className="min-h-screen bg-gray-200">
-        <div className="relative bg-gray-100 overflow-hidden">
+        <div className="relative bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
               <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
