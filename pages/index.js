@@ -123,7 +123,7 @@ export default function Home() {
 
     openContractDeploy({
       network,
-      contractName: 'counter-test',
+      contractName: 'counter-localnet',
       codeBody,
       appDetails: {
         name: 'Arcade City',
